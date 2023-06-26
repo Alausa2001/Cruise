@@ -40,7 +40,7 @@ class OrderController {
             skip: (parsedPage - 1) * parsedLimit,
             take: parsedLimit,
             });
-            res.json(orders);
+            res.status(200).json(orders);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Failed to fetch orders' });
@@ -56,7 +56,7 @@ class OrderController {
             },
             });
             if (order) {
-            res.json(order);
+            res.status(200).json(order);
             } else {
             res.status(404).json({ error: 'Order not found' });
             }
@@ -95,7 +95,7 @@ class OrderController {
                 id: parseInt(id, 10),
             },
             });
-            res.json(order);
+            res.json({ status: "order deleted successfully" });
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Failed to delete order' });
