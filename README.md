@@ -5,30 +5,30 @@ It provides endpoints to manage orders.
 
 ### Endpoints:
 
-Create an Order:
+#### Create an Order:
 
 Route: POST /orders
 Creates a new order with the provided item name, price, and quantity.
 
-GET all Orders: 
+#### GET all Orders: 
 
 Route: GET /orders
 Retrieves all orders in a paginated manner, 10 orders per page.
 
 
-GET an Order by ID:
+#### GET an Order by ID:
 
 Route: GET /orders/:id
 Retrieves a specific order by its unique ID.
 
 
-Update an Order:
+#### Update an Order:
 
 Route: PUT /orders/:id
 Updates an existing order with the provided item name, price, or quantity.
 
 
-Delete an Order:
+##### Delete an Order:
 
 Route: DELETE /orders/:id
 Deletes a specific order by its unique ID.
