@@ -9,15 +9,13 @@ interface Order {
   price: number;
 }
 
-type CreateOrderInput = Prisma.OrderCreateInput;
-type UpdateOrderInput = Prisma.OrderUpdateInput;
 
 
 const prisma = new PrismaClient();
 
 class OrderController {
     static async createOrder(req: Request, res: Response) {
-        const { price, name, quantity }: CreateOrderInput = req.body;
+        const { price, name, quantity }: Order = req.body;
         try {
             const order = await prisma.order.create({
                 data: {
@@ -70,7 +68,7 @@ class OrderController {
     
     static async updateOrder(req: Request, res: Response) {
         const { id } = req.params;
-        const { name, quantity, price }: UpdateOrderInput = req.body;
+        const { name, quantity, price }: Order = req.body;
         try {
             const order = await prisma.order.update({
             where: {
@@ -104,3 +102,5 @@ class OrderController {
         }
     }
 }
+
+export default OrderController;
