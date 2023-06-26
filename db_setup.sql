@@ -1,6 +1,6 @@
 -- create database and the user
 
-SET GLOBAL validate_password.policy=LOW;
+-- SET GLOBAL validate_password.policy=LOW;
 GRANT CREATE, ALTER, DROP, REFERENCES ON *.* TO 'cruise'@'localhost'
 CREATE DATABASE IF NOT EXISTS cruise_db;
 CREATE USER IF NOT EXISTS 'cruise'@'localhost' IDENTIFIED BY 'cruise_v1.0';
