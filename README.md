@@ -40,17 +40,19 @@ Swagger documentation available at /api-docs endpoint.
 
 
 ## USAGE
+### Clone the project
+```git clone https://github.com/Alausa2001/Cruise.git```
 
 ### Start MySQL:  
 ```sudo service mysql start```
-
-### Clone the project
-```git clone https://github.com/Alausa2001/Cruise.git```
 
 In the project directory do:
 
 ### Create a user and the database:  
 ```cat db_setup.sql | sudo mysql -uroot -p```
+
+### Install dependencies
+npm install
 
  ### start the server
 ```npm run start-server``` 
