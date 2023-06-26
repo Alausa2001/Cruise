@@ -52,7 +52,7 @@ In the project directory do:
 ```cat db_setup.sql | sudo mysql -uroot -p```
 
 ### Install dependencies
-npm install
+```npm install```
 
  ### start the server
 ```npm run start-server``` 
