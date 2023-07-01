@@ -15,6 +15,7 @@ model order {
   name String
   quantity Int
   price Float
+  status    String   @default("PENDING")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
