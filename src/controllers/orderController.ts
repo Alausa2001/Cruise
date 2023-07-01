@@ -7,6 +7,7 @@ interface Order {
   quantity:number;
   name: string;
   price: number;
+  status: string;
 }
 
 
@@ -101,6 +102,44 @@ class OrderController {
             res.status(500).json({ error: 'Failed to delete order' });
         }
     }
+    
+    static async getOrdersByStatus(req: Request, res: Response) {
+        const { status, page = 1, limit = 10 } = req.query;
+        const parsedPage = parseInt(page as string, 10);
+        const parsedLimit = parseInt(limit as string, 10);
+        try {
+          const orders = await prisma.order.findMany({
+            where: {
+              status: status as string,
+            },
+            skip: (parsedPage - 1) * parsedLimit,
+            take: parsedLimit,
+          });
+          res.status(200).json(orders);
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Failed to fetch orders by status' });
+        }
+      }
+    
+      static async updateOrderStatus(req: Request, res: Response) {
+        const { id } = req.params;
+        const { status }: Order = req.body;
+        try {
+          const order = await prisma.order.update({
+            where: {
+              id: parseInt(id, 10),
+            },
+            data: {
+              status,
+            },
+          });
+          res.status(200).json(order);
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Failed to update order status' });
+        }
+      }
 }
 
 export default OrderController;

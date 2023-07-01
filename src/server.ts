@@ -28,6 +28,9 @@ app.get('/orders/:id',  OrderController.getOrderById);
 app.put('/orders/:id',  OrderController.updateOrder);
 app.delete('/orders/:id',  OrderController.deleteOrder);
 
+app.get('/status/:status', OrderController.getOrdersByStatus);
+app.put('/:id/status', OrderController.updateOrderStatus);
+
 // swagger docs
 const options = {
     definition: {
@@ -44,6 +47,208 @@ const options = {
       ],
     },
     apis: ['./src/controllers/*.ts'],
+    paths: {
+      '/orders': {
+        get: {
+          summary: 'Retrieve all orders',
+          description: 'Get a paginated list of all orders',
+          parameters: [
+            {
+              name: 'page',
+              in: 'query',
+              description: 'Page number',
+              required: false,
+              schema: {
+                type: 'integer',
+                default: 1,
+              },
+            },
+            {
+              name: 'limit',
+              in: 'query',
+              description: 'Number of items per page',
+              required: false,
+              schema: {
+                type: 'integer',
+                default: 10,
+              },
+            },
+          ],
+          responses: {
+            '200': {
+              description: 'Successful response',
+            },
+            '500': {
+              description: 'Failed to fetch orders',
+            },
+          },
+        },
+      },
+      '/orders/{id}': {
+        get: {
+          summary: 'Retrieve an order by ID',
+          description: 'Get details of an order by its ID',
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              description: 'Order ID',
+              required: true,
+              schema: {
+                type: 'integer',
+              },
+            },
+          ],
+          responses: {
+            '200': {
+              description: 'Successful response',
+            },
+            '404': {
+              description: 'Order not found',
+            },
+            '500': {
+              description: 'Failed to fetch order',
+            },
+          },
+        },
+        put: {
+          summary: 'Update an order by ID',
+          description: 'Update the details of an order by its ID',
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              description: 'Order ID',
+              required: true,
+              schema: {
+                type: 'integer',
+              },
+            },
+          ],
+          requestBody: {
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Order',
+                },
+              },
+            },
+            required: true,
+          },
+          responses: {
+            '200': {
+              description: 'Successful response',
+            },
+            '500': {
+              description: 'Failed to update order',
+            },
+          },
+        },
+        delete: {
+          summary: 'Delete an order by ID',
+          description: 'Delete an order by its ID',
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              description: 'Order ID',
+              required: true,
+              schema: {
+                type: 'integer',
+              },
+            },
+          ],
+          responses: {
+            '200': {
+              description: 'Successful response',
+            },
+            '500': {
+              description: 'Failed to delete order',
+            },
+          },
+        },
+      },
+      '/orders/status/{status}': {
+        get: {
+          summary: 'Retrieve orders by status',
+          description: 'Get a paginated list of orders filtered by status',
+          parameters: [
+            {
+              name: 'status',
+              in: 'path',
+              description: 'Order status',
+              required: true,
+              schema: {
+                type: 'string',
+              },
+            },
+            {
+              name: 'page',
+              in: 'query',
+              description: 'Page number',
+              required: false,
+              schema: {
+                type: 'integer',
+                default: 1,
+              },
+            },
+            {
+              name: 'limit',
+              in: 'query',
+              description: 'Number of items per page',
+              required: false,
+              schema: {
+                type: 'integer',
+                default: 10,
+              },
+            },
+          ],
+          responses: {
+            '200': {
+              description: 'Successful response',
+            },
+            '500': {
+              description: 'Failed to fetch orders by status',
+            },
+          },
+        },
+      },
+      '/orders/{id}/status': {
+        put: {
+          summary: 'Update order status',
+          description: 'Update the status of an order by its ID',
+          parameters: [
+            {
+              name: 'id',
+              in: 'path',
+              description: 'Order ID',
+              required: true,
+              schema: {
+                type: 'integer',
+              },
+            },
+          ],
+          requestBody: {
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Order',
+                },
+              },
+            },
+            required: true,
+          },
+          responses: {
+            '200': {
+              description: 'Successful response',
+            },
+            '500': {
+              description: 'Failed to update order status',
+            },
+          },
+        },
+      },
+    },  
 };
 
   
